@@ -1,77 +1,40 @@
 package com.company;
-import jdk.swing.interop.LightweightContentWrapper;
 
-import java.util.ArrayList;
-import java.util.List;
+class Formula{
+    private static Formula formula = new Formula();
+    private double x, y;
+    private Formula(){
 
-abstract class Logistic{
-    String name;
-    List<String> info = new ArrayList<>();
-    public String toString(){
-        return "Тип перевозки: " + name + "\n" + info;
+    }
+    public static Formula getInstance(){
+        return formula;
+    }
+    public void setX(double x){
+        this.x = x;
+    }
+    public void setY(double y){
+        this.y = y;
+    }
+    public double Decision(){
+        return (2 * x) + (3 / y);
+    }
+    public double getX(){
+        return x;
+    }
+    public double getY(){
+        return y;
     }
 }
-
-class Air extends Logistic{
-    public Air(){
-        name = "Воздушный";
-        info.add("Тип транспорта: Самолёт");
-        info.add("Грузоподъёмность: 5000 тонн");
-        info.add("Стоимость 1 перевозки: 80.000$");
-    }
-}
-
-class Truck extends Logistic{
-    public Truck(){
-        name = "Наземный";
-        info.add("Тип транспорта: Грузовик");
-        info.add("Грузоподъёмность: 1000 тонн");
-        info.add("Стоимость 1 перевозки: 30.000$");
-    }
-}
-
-class Ship extends Logistic{
-    public Ship(){
-        name = "Водный";
-        info.add("Тип транспорта: Корабль");
-        info.add("Грузоподъёмность: 10000 тонн");
-        info.add("Стоимость 1 перевозки: 150.000$");
-    }
-}
-
-class SighAir extends SignAContract{
-    public Logistic signContract(){
-        return new Air();
-    }
-}
-
-class SighTruck extends SignAContract{
-    public Logistic signContract(){
-        return new Truck();
-    }
-}
-
-class SighShip extends SignAContract{
-    public Logistic signContract(){
-        return new Ship();
-    }
-}
-
-abstract class SignAContract{
-    public abstract Logistic signContract();
-}
-
 
 public class Main {
     public static void main(String[] args) {
-        SignAContract ship = new SighShip();
-        SignAContract air = new SighAir();
-        SignAContract truck = new SighTruck();
-        Logistic myShip = ship.signContract();
-        Logistic myAir = air.signContract();
-        Logistic myTruck = truck.signContract();
-        System.out.println(myShip + "\n");
-        System.out.println(myAir + "\n");
-        System.out.println(myTruck + "\n");
+        Formula formula = Formula.getInstance();
+        formula.setX(5);
+        formula.setY(2);
+        System.out.println(formula.Decision());
+
+        Formula formula1 = Formula.getInstance();
+        System.out.println(formula1.getX());
+        System.out.println(formula1.getY());
     }
 }

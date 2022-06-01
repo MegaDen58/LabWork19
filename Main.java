@@ -27,8 +27,8 @@ class Group implements Observable{
     }
 
     @Override
-    public void regObserver(Observer o) {
-        list.add(o);
+    public void regObserver(Observer obs) {
+        list.add(obs);
     }
 }
 class User implements Observer{

@@ -13,7 +13,7 @@ interface Observer{
 
 class Group implements Observable{
     List<Observer> list = new ArrayList<>();
-    String info = "Новость";
+    String info;
     void setInfo(String info){
         this.info = info;
         notifyObservers();
